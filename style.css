@@ -1,3 +1,21 @@
+#kenya-news ul {
+  list-style: none;
+  padding: 0;
+}
+
+#kenya-news li {
+  margin: 0.5rem 0;
+}
+
+#kenya-news a {
+  text-decoration: none;
+  color: #1565C0;
+  font-weight: bold;
+}
+
+#kenya-news a:hover {
+  color: #2E7D32;
+}
 .hero {
   background: linear-gradient(120deg, rgba(46, 125, 50, 0.85), rgba(21, 101, 192, 0.85)),
               url('hero-bg.jpg') center/cover no-repeat;
