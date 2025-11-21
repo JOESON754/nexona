@@ -1,103 +1,38 @@
-/* Branding colors */
-:root {
-  --kenya-green: #2E7D32;
-  --global-blue: #1565C0;
-  --light-gray: #f5f5f5;
-}
+<!-- Hero Section -->
+<section class="hero">
+  <img id="hero-img" alt="Kenya photo">
+  <div class="hero-text">
+    <h2>Truth. Voices. Connection.</h2>
+    <p>Amplifying authentic perspectives from Kenya and beyond.</p>
+    <a href="voices.html" class="btn">Explore Voices</a>
+  </div>
+</section>
 
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: var(--light-gray);
-  color: #333;
-}
+<!-- Content Cards -->
+<section class="cards">
+  <h2>Latest Highlights</h2>
+  <div class="card-grid">
+    <div class="card">
+      <img id="kenya-img" alt="Kenya">
+      <h3>Kenya Updates</h3>
+      <p>Grassroots reports and verified news from across Kenya.</p>
+      <a href="kenya.html" class="btn">Read More</a>
+    </div>
+    <div class="card">
+      <img id="global-img" alt="Global">
+      <h3>Global Reach</h3>
+      <p>Connecting Kenya’s voices to worldwide conversations.</p>
+      <a href="global.html" class="btn">Read More</a>
+    </div>
+    <div class="card">
+      <img id="voices-img" alt="Voices">
+      <h3>Community Voices</h3>
+      <p>First-hand reports and contributions from citizens.</p>
+      <a href="voices.html" class="btn">Read More</a>
+    </div>
+  </div>
+</section>
 
-/* Navbar */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: var(--global-blue);
-  padding: 1rem 2rem;
-}
-.logo {
-  color: white;
-  font-size: 1.5rem;
-}
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 1rem;
-}
-.nav-links a {
-  color: white;
-  text-decoration: none;
-}
-.nav-links .btn {
-  background: var(--kenya-green);
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-}
-
-/* Hero */
-.hero {
-  background: url('images/hero.jpg') center/cover no-repeat;
-  color: white;
-  text-align: center;
-  padding: 5rem 2rem;
-}
-.hero-text h2 {
-  font-size: 2.5rem;
-}
-.hero-text p {
-  font-size: 1.2rem;
-}
-.hero-text .btn {
-  background: var(--kenya-green);
-  color: white;
-  padding: 0.7rem 1.2rem;
-  border-radius: 4px;
-  text-decoration: none;
-}
-
-/* Cards */
-.cards {
-  padding: 2rem;
-  text-align: center;
-}
-.card-grid {
-  display: flex;
-  gap: 1.5rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-.card {
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  width: 300px;
-  padding: 1rem;
-}
-.card img {
-  width: 100%;
-  border-radius: 6px;
-}
-.card h3 {
-  color: var(--global-blue);
-}
-.card .btn {
-  display: inline-block;
-  margin-top: 1rem;
-  background: var(--kenya-green);
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  text-decoration: none;
-}
-
-/* Footer */
-footer {
-  background: var(--global-blue);
   color: white;
   text-align: center;
   padding: 1rem;
