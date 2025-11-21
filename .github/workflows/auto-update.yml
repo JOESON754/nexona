@@ -20,19 +20,19 @@ jobs:
       - name: Install dependencies
         run: npm install node-fetch
 
-      - name: Fetch feeds and summarize with AI
+      - name: Fetch feeds, summarize with AI, and update satellite
         run: |
           node <<'EOF'
           import fetch from "node-fetch";
           import fs from "fs";
 
           async function run() {
-            // Fetch Nation Africa RSS
+            // === 1. Fetch Nation Africa RSS ===
             const rss = await fetch("https://api.rss2json.com/v1/api.json?rss_url=https://nation.africa/rss.xml");
             const data = await rss.json();
             const headlines = data.items.slice(0,5).map(i => i.title).join("\n");
 
-            // Send to AI summarizer (replace with your endpoint + key)
+            // === 2. Summarize with AI (replace with your endpoint + key) ===
             const ai = await fetch("https://your-ai-endpoint", {
               method: "POST",
               headers: { "Content-Type": "application/json", "Authorization": "Bearer YOUR_AI_KEY" },
@@ -40,10 +40,22 @@ jobs:
             });
             const summary = await ai.json();
 
-            // Update index.html placeholder
+            // === 3. Fetch NASA Satellite Image (Nairobi example) ===
+            const nasa = await fetch("https://api.nasa.gov/planetary/earth/assets?lon=36.8219&lat=-1.2921&date=2025-11-21&dim=0.1&api_key=YOUR_NASA_KEY");
+            const nasaData = await nasa.json();
+            const satImage = nasaData.url || "";
+
+            // === 4. Update index.html placeholders ===
             let html = fs.readFileSync("index.html", "utf8");
+
+            // Replace AUTO-NEWS block
             html = html.replace(/<!-- AUTO-NEWS -->.*<!-- END-AUTO-NEWS -->/s,
               `<!-- AUTO-NEWS --><p>${summary.output || summary}</p><!-- END-AUTO-NEWS -->`);
+
+            // Replace SATELLITE block
+            html = html.replace(/<!-- AUTO-SAT -->.*<!-- END-AUTO-SAT -->/s,
+              `<!-- AUTO-SAT --><img src="${satImage}" alt="Latest Satellite View" style="width:100%;border-radius:8px;"><!-- END-AUTO-SAT -->`);
+
             fs.writeFileSync("index.html", html);
           }
           run();
@@ -54,5 +66,5 @@ jobs:
           git config user.name "Nexona Bot"
           git config user.email "bot@nexona"
           git add index.html
-          git commit -m "Auto-update news summary"
+          git commit -m "Auto-update news + satellite"
           git push
