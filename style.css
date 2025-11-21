@@ -1,112 +1,33 @@
-/* General Reset */
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  line-height: 1.6;
-  background-color: #f9f9f9;
-  color: #333;
-}
-
-/* Header */
-header {
-  background: linear-gradient(90deg, #2E7D32, #1565C0);
+/* Hero Section */
+.hero {
+  background: linear-gradient(120deg, #2E7D32, #1565C0);
   color: white;
-  padding: 2rem;
   text-align: center;
+  padding: 4rem 2rem;
 }
 
-header h1 {
-  margin: 0;
-  font-size: 2.5rem;
-}
-
-header p {
-  margin: 0.5rem 0 0;
-  font-size: 1.2rem;
-}
-
-/* Navigation Bar */
-nav {
-  background: #333;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-nav a {
-  color: white;
-  text-decoration: none;
-  padding: 1rem;
-  transition: background 0.3s, color 0.3s;
-}
-
-nav a:hover {
-  background: #1565C0;
-  color: #fff;
-}
-
-/* Main Content */
-main {
-  padding: 2rem;
-  max-width: 1000px;
-  margin: auto;
-}
-
-/* Section Titles */
-section h2 {
-  color: #1565C0;
+.hero h2 {
+  font-size: 2.2rem;
   margin-bottom: 1rem;
 }
 
-/* Article Cards */
-.card {
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.hero-btn {
   background: white;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 1rem;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.card h3 {
-  margin-top: 0;
-  color: #2E7D32;
-}
-
-.card p {
-  margin: 0.5rem 0;
-}
-
-.card a {
-  display: inline-block;
-  margin-top: 0.5rem;
   color: #1565C0;
+  padding: 0.8rem 1.5rem;
+  border-radius: 5px;
   text-decoration: none;
   font-weight: bold;
+  transition: background 0.3s, color 0.3s;
 }
 
-.card a:hover {
-  text-decoration: underline;
-}
-
-/* Footer */
-footer {
-  background: #333;
+.hero-btn:hover {
+  background: #1565C0;
   color: white;
-  text-align: center;
-  padding: 1rem;
-  margin-top: 2rem;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  nav {
-    flex-direction: column;
-  }
-
-  nav a {
-    text-align: center;
-    border-top: 1px solid #444;
-  }
 }
 
