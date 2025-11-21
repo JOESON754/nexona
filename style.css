@@ -22,25 +22,9 @@ header p {
   font-size: 1.2rem;
 }
 
-/* Hero section */
-.hero {
-  background: url('hero-image.jpg') center/cover no-repeat;
-  color: white;
-  text-align: center;
-  padding: 4rem 2rem;
-}
-.hero h1 {
-  font-size: 3rem;
-  margin: 0;
-}
-.hero p {
-  font-size: 1.3rem;
-  margin-top: 1rem;
-}
-
 /* Navigation */
 nav {
-  position: sticky;
+  position: sticky; /* keeps nav visible when scrolling */
   top: 0;
   background: #fff;
   display: flex;
@@ -82,5 +66,21 @@ main.grid {
 }
 .card h2 {
   margin-top: 0;
-  color
+  color: #1565C0;
+}
+
+/* Footer */
+footer {
+  background: #1565C0;
+  color: white;
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.9rem;
+  margin-top: 2rem;
+}
+footer a {
+  color: #fff;
+  margin: 0 0.5rem;
+  text-decoration: underline;
+}
 
