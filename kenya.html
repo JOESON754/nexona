@@ -2,45 +2,56 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Kenya News - Nexona</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexona | Kenya</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
-    <h1>Kenya News</h1>
-    <p>Grassroots updates and local perspectives</p>
+    <nav class="navbar">
+      <h1 class="logo">Nexona</h1>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="kenya.html">Kenya</a></li>
+        <li><a href="global.html">Global</a></li>
+        <li><a href="voices.html">Voices</a></li>
+        <li><a href="contribute.html" class="btn">Contribute</a></li>
+      </ul>
+    </nav>
   </header>
 
-  <nav>
-    <a href="/nexona/">Home</a>
-    <a href="kenya.html">Kenya News</a>
-    <a href="global.html">Global Updates</a>
-    <a href="voices.html">Community Voices</a>
-    <a href="contribute.html">Contribute</a>
-  </nav>
+  <!-- Banner -->
+  <section class="page-banner">
+    <img id="kenya-banner" alt="Kenya banner">
+    <div class="banner-text">
+      <h2>Kenya Updates</h2>
+      <p>Grassroots reports and verified news from across Kenya.</p>
+    </div>
+  </section>
 
-  <main>
-    <section>
-      <h2>Latest Stories</h2>
-
-      <article class="card">
-        <h3>Community Market Opens in Nairobi</h3>
-        <p>A new grassroots market has opened in Nairobi, bringing together local farmers and artisans.</p>
-        <small>Published: Nov 21, 2025</small>
-      </article>
-
-      <article class="card">
-        <h3>Youth Forum on Climate Action</h3>
-        <p>Kenyan youth leaders gathered to discuss climate challenges and propose community-driven solutions.</p>
-        <small>Published: Nov 20, 2025</small>
-      </article>
-    </section>
-  </main>
+  <!-- Content -->
+  <section class="cards">
+    <h2>Recent Stories</h2>
+    <div class="card-grid">
+      <!-- Add article cards here -->
+    </div>
+  </section>
 
   <footer>
-    <p>© 2025 Nexona Information Network</p>
+    <p>&copy; 2025 Nexona. Built with community voices.</p>
   </footer>
-</body>
-</html>
 
+  <script>
+    async function loadImage(query, elementId) {
+      try {
+        const response = await fetch(
+          `https://api.unsplash.com/photos/random?query=${query}&client_id=YOUR_ACCESS_KEY`
+        );
+        const data = await response.json();
+        document.getElementById(elementId).src = data.urls.regular;
+      } catch (error) {
+        console.error("Error fetching image:", error);
+      }
+    }
+    loadImage("kenya landscape", "kenya-banner
 
