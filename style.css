@@ -13,33 +13,49 @@ header {
   text-align: center;
   padding: 2rem;
 }
-
 header h1 {
   margin: 0;
   font-size: 2.5rem;
 }
-
 header p {
   margin: 0.5rem 0 0;
   font-size: 1.2rem;
 }
 
+/* Hero section */
+.hero {
+  background: url('hero-image.jpg') center/cover no-repeat;
+  color: white;
+  text-align: center;
+  padding: 4rem 2rem;
+}
+.hero h1 {
+  font-size: 3rem;
+  margin: 0;
+}
+.hero p {
+  font-size: 1.3rem;
+  margin-top: 1rem;
+}
+
 /* Navigation */
 nav {
+  position: sticky;
+  top: 0;
   background: #fff;
   display: flex;
   justify-content: center;
   padding: 1rem;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  z-index: 1000;
 }
-
 nav a {
   margin: 0 1rem;
   text-decoration: none;
   color: #1565C0;
   font-weight: bold;
+  transition: color 0.3s ease;
 }
-
 nav a:hover {
   color: #2E7D32;
 }
@@ -58,19 +74,13 @@ main.grid {
   border-radius: 8px;
   padding: 1.5rem;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
 .card h2 {
   margin-top: 0;
-  color: #1565C0;
-}
-
-/* Footer */
-footer {
-  background: #1565C0;
-  color: white;
-  text-align: center;
-  padding: 1rem;
-  margin-top: 2rem;
-}
+  color
 
