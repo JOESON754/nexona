@@ -1,3 +1,20 @@
+<script>
+  async function loadSatellite() {
+    const response = await fetch(
+      "https://api.nasa.gov/planetary/earth/assets?lon=36.8219&lat=-1.2921&date=2025-11-21&dim=0.1&api_key=DEMO_KEY"
+    );
+    const data = await response.json();
+    const satDiv = document.getElementById("satellite");
+
+    if (data.url) {
+      satDiv.innerHTML = `<img src="${data.url}" alt="Satellite view of Nairobi" style="width:100%;border-radius:8px;">`;
+    } else {
+      satDiv.innerHTML = "<p>No satellite data available right now.</p>";
+    }
+  }
+
+  loadSatellite();
+</script>
 <section id="hidden-layers">
   <h2>Hidden Layers</h2>
   <p>Unfolding truths from community voices, mainstream feeds, and satellite eyes.</p>
