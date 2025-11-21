@@ -1,67 +1,92 @@
-.card {
-  background: #f1f1f1;
-  padding: 20px;
-  margin: 15px 0;
-  border-radius: 6px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-}
-
-.card h3 {
-  margin-top: 0;
-  color: #2E7D32; /* Kenya green */
-}
-
-.card small {
-  color: #555;
-  font-size: 0.9em;
-}
-/* General styles */
+/* General Reset */
 body {
-  font-family: 'Open Sans', Arial, sans-serif;
   margin: 0;
-  padding: 0;
-  background: #f9f9f9;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+  background-color: #f9f9f9;
   color: #333;
 }
 
 /* Header */
 header {
-  background: #1565C0; /* Blue for global reach */
+  background: linear-gradient(90deg, #2E7D32, #1565C0);
   color: white;
-  padding: 30px;
+  padding: 2rem;
   text-align: center;
 }
 
-/* Navigation */
+header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+header p {
+  margin: 0.5rem 0 0;
+  font-size: 1.2rem;
+}
+
+/* Navigation Bar */
 nav {
-  background: #2E7D32; /* Green for Kenya */
-  padding: 15px;
-  text-align: center;
+  background: #333;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 nav a {
   color: white;
-  margin: 0 15px;
+  text-decoration: none;
+  padding: 1rem;
+  transition: background 0.3s, color 0.3s;
+}
+
+nav a:hover {
+  background: #1565C0;
+  color: #fff;
+}
+
+/* Main Content */
+main {
+  padding: 2rem;
+  max-width: 1000px;
+  margin: auto;
+}
+
+/* Section Titles */
+section h2 {
+  color: #1565C0;
+  margin-bottom: 1rem;
+}
+
+/* Article Cards */
+.card {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.card h3 {
+  margin-top: 0;
+  color: #2E7D32;
+}
+
+.card p {
+  margin: 0.5rem 0;
+}
+
+.card a {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: #1565C0;
   text-decoration: none;
   font-weight: bold;
 }
 
-nav a:hover {
+.card a:hover {
   text-decoration: underline;
-}
-
-/* Sections */
-section {
-  padding: 30px;
-  margin: 20px auto;
-  max-width: 800px;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-
-section h2 {
-  color: #1565C0;
 }
 
 /* Footer */
@@ -69,6 +94,19 @@ footer {
   background: #333;
   color: white;
   text-align: center;
-  padding: 15px;
-  margin-top: 30px;
+  padding: 1rem;
+  margin-top: 2rem;
 }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column;
+  }
+
+  nav a {
+    text-align: center;
+    border-top: 1px solid #444;
+  }
+}
+
