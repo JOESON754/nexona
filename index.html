@@ -23,6 +23,7 @@
 
   <!-- Hero Section -->
   <section class="hero">
+    <img id="hero-img" alt="Kenya photo">
     <div class="hero-text">
       <h2>Truth. Voices. Connection.</h2>
       <p>Amplifying authentic perspectives from Kenya and beyond.</p>
@@ -35,19 +36,19 @@
     <h2>Latest Highlights</h2>
     <div class="card-grid">
       <div class="card">
-        <img src="images/kenya.jpg" alt="Kenya">
+        <img id="kenya-img" alt="Kenya">
         <h3>Kenya Updates</h3>
         <p>Grassroots reports and verified news from across Kenya.</p>
         <a href="kenya.html" class="btn">Read More</a>
       </div>
       <div class="card">
-        <img src="images/global.jpg" alt="Global">
+        <img id="global-img" alt="Global">
         <h3>Global Reach</h3>
         <p>Connecting Kenya’s voices to worldwide conversations.</p>
         <a href="global.html" class="btn">Read More</a>
       </div>
       <div class="card">
-        <img src="images/voices.jpg" alt="Voices">
+        <img id="voices-img" alt="Voices">
         <h3>Community Voices</h3>
         <p>First-hand reports and contributions from citizens.</p>
         <a href="voices.html" class="btn">Read More</a>
@@ -58,7 +59,30 @@
   <footer>
     <p>&copy; 2025 Nexona. Built with community voices.</p>
   </footer>
+
+  <!-- Unsplash API Script -->
+  <script>
+    async function loadImage(query, elementId) {
+      try {
+        const response = await fetch(
+          `https://api.unsplash.com/photos/random?query=${query}&client_id=YOUR_ACCESS_KEY`
+        );
+        const data = await response.json();
+        document.getElementById(elementId).src = data.urls.regular;
+      } catch (error) {
+        console.error("Error fetching image:", error);
+      }
+    }
+
+    // Load hero + cards
+    loadImage("kenya landscape", "hero-img");
+    loadImage("kenya", "kenya-img");
+    loadImage("global city", "global-img");
+    loadImage("community people", "voices-img");
+  </script>
 </body>
+</html>
+
 </html>
 
 
