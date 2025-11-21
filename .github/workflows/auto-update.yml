@@ -24,6 +24,7 @@ jobs:
         run: |
           node <<'EOF'
           import fetch from "node-fetch";
+          import fs from "fs";
 
           async function run() {
             // Fetch Nation Africa RSS
@@ -31,19 +32,18 @@ jobs:
             const data = await rss.json();
             const headlines = data.items.slice(0,5).map(i => i.title).join("\n");
 
-            // Send to AI summarizer (replace with your endpoint)
+            // Send to AI summarizer (replace with your endpoint + key)
             const ai = await fetch("https://your-ai-endpoint", {
               method: "POST",
-              headers: { "Content-Type": "application/json" },
+              headers: { "Content-Type": "application/json", "Authorization": "Bearer YOUR_AI_KEY" },
               body: JSON.stringify({ text: headlines })
             });
             const summary = await ai.json();
 
-            // Write summary into index.html
-            const fs = require("fs");
+            // Update index.html placeholder
             let html = fs.readFileSync("index.html", "utf8");
             html = html.replace(/<!-- AUTO-NEWS -->.*<!-- END-AUTO-NEWS -->/s,
-              `<!-- AUTO-NEWS --><p>${summary}</p><!-- END-AUTO-NEWS -->`);
+              `<!-- AUTO-NEWS --><p>${summary.output || summary}</p><!-- END-AUTO-NEWS -->`);
             fs.writeFileSync("index.html", html);
           }
           run();
