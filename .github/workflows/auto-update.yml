@@ -21,63 +21,67 @@ jobs:
         run: npm install node-fetch
 
       - name: Fetch feeds, summarize with AI, and update satellites
-        run: |
-          node <<'EOF'
-          import fetch from "node-fetch";
-          import fs from "fs";
+  run: |
+    node <<'EOF'
+    const fetch = require("node-fetch");
+    const fs = require("fs");
 
-          async function run() {
-            // === 1. Fetch Nation Africa RSS ===
-            const rss = await fetch("https://api.rss2json.com/v1/api.json?rss_url=https://nation.africa/rss.xml");
-            const data = await rss.json();
-            const headlines = data.items.slice(0,5).map(i => i.title).join("\n");
+    async function run() {
+      // === 1. Fetch RSS feed ===
+      const rss = await fetch("https://www.standardmedia.co.ke/rss/kenya");
+      const rssText = await rss.text();
 
-            // === 2. Summarize with AI (replace with your endpoint + key) ===
-            const ai = await fetch("https://your-ai-endpoint", {
-              method: "POST",
-              headers: { "Content-Type": "application/json", "Authorization": "Bearer YOUR_AI_KEY" },
-              body: JSON.stringify({ text: headlines })
-            });
-            const summary = await ai.json();
+      // === 2. Summarize with AI ===
+      const ai = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${process.env.OPENAI_KEY}`
+        },
+        body: JSON.stringify({
+          model: "gpt-4.1-mini",
+          messages: [{ role: "user", content: `Summarize this feed: ${rssText}` }]
+        })
+      });
+      const summary = await ai.json();
 
-            // === 3. Fetch NASA Satellite Images for Nairobi, Mombasa, Kisumu ===
-            const nasaKey = "YOUR_NASA_KEY";
-            const cities = {
-              "Nairobi": { lon: 36.8219, lat: -1.2921 },
-              "Mombasa": { lon: 39.6682, lat: -4.0435 },
-              "Kisumu": { lon: 34.7679, lat: -0.0917 }
-            };
+      // === 3. Fetch NASA Satellite Images ===
+      const nasaKey = process.env.NASA_KEY;
+      const cities = {
+        "Nairobi": { lon: 36.8219, lat: -1.2921 },
+        "Mombasa": { lon: 39.6682, lat: -4.0435 },
+        "Kisumu": { lon: 34.7679, lat: -0.0917 }
+      };
 
-            let satelliteHTML = "";
-            for (const [city, coords] of Object.entries(cities)) {
-              const nasa = await fetch(
-                `https://api.nasa.gov/planetary/earth/assets?lon=${coords.lon}&lat=${coords.lat}&date=2025-11-21&dim=0.1&api_key=${nasaKey}`
-              );
-              const nasaData = await nasa.json();
-              const satImage = nasaData.url || "";
-              satelliteHTML += `
-                <div class="sat-block">
-                  <h4>${city} Satellite View</h4>
-                  ${satImage ? `<img src="${satImage}" alt="Satellite view of ${city}" style="width:100%;border-radius:8px;">` : `<p>No satellite data available for ${city}.</p>`}
-                </div>
-              `;
-            }
+      let satelliteHTML = "";
+      for (const [city, coords] of Object.entries(cities)) {
+        const nasa = await fetch(
+          `https://api.nasa.gov/planetary/earth/assets?lon=${coords.lon}&lat=${coords.lat}&date=2025-11-21&dim=0.1&api_key=${nasaKey}`
+        );
+        const nasaData = await nasa.json();
+        const satImage = nasaData.url || "";
+        satelliteHTML += `
+          <div class="sat-block">
+            <h4>${city} Satellite View</h4>
+            ${satImage ? `<img src="${satImage}" alt="Satellite view of ${city}" style="width:100%;border-radius:8px;">` : `<p>No satellite data available for ${city}.</p>`}
+          </div>
+        `;
+      }
 
-            // === 4. Update index.html placeholders ===
-            let html = fs.readFileSync("index.html", "utf8");
+      // === 4. Update index.html placeholders ===
+      let html = fs.readFileSync("index.html", "utf8");
+      html = html.replace(/<!-- AUTO-NEWS -->.*<!-- END-AUTO-NEWS -->/s,
+        `<!-- AUTO-NEWS --><p>${summary.choices?.[0]?.message?.content || "No summary available"}</p><!-- END-AUTO-NEWS -->`);
 
-            // Replace AUTO-NEWS block
-            html = html.replace(/<!-- AUTO-NEWS -->.*<!-- END-AUTO-NEWS -->/s,
-              `<!-- AUTO-NEWS --><p>${summary.output || summary}</p><!-- END-AUTO-NEWS -->`);
+      html = html.replace(/<!-- AUTO-SAT -->.*<!-- END-AUTO-SAT -->/s,
+        `<!-- AUTO-SAT -->${satelliteHTML}<!-- END-AUTO-SAT -->`);
 
-            // Replace AUTO-SAT block
-            html = html.replace(/<!-- AUTO-SAT -->.*<!-- END-AUTO-SAT -->/s,
-              `<!-- AUTO-SAT -->${satelliteHTML}<!-- END-AUTO-SAT -->`);
+      fs.writeFileSync("index.html", html);
+    }
 
-            fs.writeFileSync("index.html", html);
-          }
-          run();
-          EOF
+    run();
+    EOF
+
 
       - name: Commit changes
         run: |
