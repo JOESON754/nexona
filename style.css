@@ -1,47 +1,211 @@
-/* Header container */
+/* ===========================
+   Global Styles
+=========================== */
+:root {
+  --nexona-blue: #004488;
+  --nexona-green: #006644;
+  --light-bg: #f9f9f9;
+  --dark-text: #333;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  color: var(--dark-text);
+  background-color: #fff;
+  line-height: 1.6;
+}
+
+/* Smooth transitions for interactive elements */
+a, button {
+  transition: all 0.3s ease;
+}
+
+/* ===========================
+   Header
+=========================== */
 header {
-  display: flex;              /* puts logo + text side by side */
-  align-items: center;        /* vertically centers items */
-  justify-content: space-between; /* spreads logo and nav evenly */
-  padding: 10px 20px;
-  background-color: #f9f9f9;  /* optional: light background */
-  border-bottom: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 30px;
+  background-color: var(--light-bg);
+  border-bottom: 2px solid var(--nexona-blue);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
-/* Logo styling */
 .logo {
-  height: 60px;               /* adjust size */
-  margin-right: 15px;         /* spacing from text */
+  height: 55px;
+  margin-right: 15px;
 }
 
-/* Title + tagline block */
 .title-text {
   display: flex;
-  flex-direction: column;     /* stack title above tagline */
+  flex-direction: column;
 }
 
 .title-text h1 {
   margin: 0;
   font-size: 1.8em;
+  color: var(--nexona-blue);
 }
 
 .title-text p {
   margin: 0;
   font-size: 1em;
-  color: #555;                /* softer color for tagline */
+  color: var(--nexona-green);
+  font-style: italic;
 }
 
-/* Navigation bar */
+/* Navigation */
 nav {
   display: flex;
-  gap: 15px;                  /* spacing between links */
+  gap: 20px;
 }
 
 nav a {
   text-decoration: none;
-  color: #0077cc;             /* Nexona blue */
+  color: var(--nexona-blue);
+  font-weight: bold;
+  position: relative;
+}
+
+nav a::after {
+  content: '';
+  display: block;
+  height: 2px;
+  width: 0;
+  background: var(--nexona-green);
+  transition: width 0.3s;
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* ===========================
+   Marketplace Grid
+=========================== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+  padding: 30px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+.listing-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.card h3 {
+  margin: 15px;
+  color: var(--nexona-blue);
+}
+
+.card p {
+  margin: 0 15px 10px;
+}
+
+.contributor {
+  font-size: 0.9em;
+  color: #777;
+  margin: 0 15px 10px;
+}
+
+/* Buttons */
+.view-btn {
+  display: inline-block;
+  margin: 0 15px 15px;
+  padding: 8px 14px;
+  background: var(--nexona-blue);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
   font-weight: bold;
 }
+
+.view-btn:hover {
+  background: var(--nexona-green);
+}
+
+/* ===========================
+   Mission Section
+=========================== */
+.mission {
+  grid-column: 1 / -1;
+  text-align: center;
+  background: var(--light-bg);
+  padding: 30px;
+  border-radius: 8px;
+}
+
+.mission h2 {
+  color: var(--nexona-green);
+  margin-bottom: 10px;
+}
+
+/* ===========================
+   Footer
+=========================== */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: var(--light-bg);
+  border-top: 2px solid var(--nexona-blue);
+}
+
+footer a {
+  color: var(--nexona-blue);
+  text-decoration: none;
+  margin: 0 8px;
+}
+
+footer a:hover {
+  color: var(--nexona-green);
+}
+
+/* ===========================
+   Responsive Design
+=========================== */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  nav {
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+
+  .title-text h1 {
+    font-size: 1.5em;
+  }
+}
+
 
 
 
