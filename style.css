@@ -1,8 +1,9 @@
 .logo {
-  height: 60px;
-  margin-right: 15px;
-  vertical-align: middle;
+  height: 60px;       /* controls logo size */
+  margin-right: 15px; /* spacing between logo and text */
+  vertical-align: middle; /* keeps it aligned with title */
 }
+
 .listing {
   display: flex;
   flex-direction: column;
